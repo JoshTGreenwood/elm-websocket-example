@@ -73,4 +73,7 @@ decodeTime message =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    listen websocketURL decodeTime
+    if model.streamTime then
+        listen websocketURL decodeTime
+    else
+        Sub.none
