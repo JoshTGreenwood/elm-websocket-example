@@ -61,7 +61,7 @@ view model =
 
 websocketURL : String
 websocketURL =
-    "ws://localhost:3028"
+    "ws://localhost:5000"
 
 
 subscriptions : Model -> Sub Msg
