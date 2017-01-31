@@ -3,6 +3,7 @@ module App exposing (..)
 import Html exposing (..)
 import Html.Events exposing (onClick)
 import WebSocket exposing (listen, send)
+import Json.Decode exposing (decodeString, at, string)
 
 
 type alias Model =
@@ -64,6 +65,12 @@ websocketURL =
     "ws://localhost:5000"
 
 
+decodeTime : String -> Msg
+decodeTime message =
+    decodeString (at [ "time"] string) message
+        |> Result.withDefault "Error Decoding Time"
+        |> Time
+
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    listen websocketURL Time
+    listen websocketURL decodeTime
